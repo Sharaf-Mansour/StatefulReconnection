@@ -1,5 +1,5 @@
 ﻿.reconnect-overlay {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -16,7 +16,7 @@
     .reconnect-overlay::before {
         content: '';
         background-color: rgba(0,0,0,0.4);
-        position: absolute;
+        position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
