@@ -6,15 +6,25 @@
 @namespace Microsoft.AspNetCore.Components.Web
 
 <div class="reconnect-overlay" @ref="overlay">
-    <div class="reconnect-dialog">
-        <div class="lds-ripple"><div></div><div></div></div>
-        <p>Rejoining the server...</p>
-        <p class="check-internet">Check your internet connection</p>
-        <button onclick="location.reload()" style="display: none">Reload</button>
-    </div>
+    @if (!CustomUIProvided)
+    {
+        <div class="reconnect-dialog">
+            <div class="lds-ripple"><div></div><div></div></div>
+            <p>Rejoining the server...</p>
+            <p class="check-internet">Check your internet connection</p>
+         </div>
+    }
+    else
+    {
+        @RenderFragment
+    }
 </div>
+<button onclick="location.reload()" style="display: none">Reload</button>
 
 @code {
+    [Parameter] public RenderFragment? RenderFragment { get; set; } = null;
+    bool CustomUIProvided => RenderFragment is not null;
+
     private ElementReference overlay;
     private Task<IJSObjectReference> _moduleLoader = default!;
     private bool _disposed;
